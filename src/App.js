@@ -1,7 +1,14 @@
 import './App.css';
+import React, {useState, useEffect} from 'react';
 import Dropdown from './Dropdown'
+import axios from 'axios';
 
 const App = () => {
+
+  console.log("RENDERING APP.js")
+
+  const clientId = "9987e61134c448e4b3d10e940f6df0c4"
+  const clientSecret = "7f0b835b16a44fe1a90a71922df75fff"
 
   const data = [
     {value: 1, name: "A"},
@@ -9,14 +16,34 @@ const App = () => {
     {value: 3, name: "C"},
     ]
 
+    const [token, setToken] = useState('');
+
+    useEffect(() => {
+      axios('https://accounts.spotify.com/api/token', {
+        headers: {
+          'Content-Type' : 'application/x-www-form-urlencoded',
+          'Authorisation' : 'Basic' + btoa(clientId + ":" + clientSecret)
+        },
+        data: 'grant_type=client_credentials',
+        method: 'POST'
+      })
+      .then(tokenResponse => {
+        console.log(tokenResponse.data.access_token)
+      })
+
+    }, [])
+
+
   return (
-    <div className ="m-5 text-center">
-      <Dropdown options = {data}/>
-      <Dropdown options = {data}/>
-      <button type='submit'>
-        Search
-      </button>
-    </div>
+    <form onSubmit = {() => {}}>
+      <div className ="m-5 text-center container">
+        <Dropdown options = {data}/>
+        <Dropdown options = {data}/>
+        <button type='submit'>
+          Search
+        </button>
+      </div>
+    </form>
   );
 }
 
