@@ -10,8 +10,12 @@ const App = () => {
     ]
 
   return (
-    <div>
+    <div className ="m-5 text-center">
       <Dropdown options = {data}/>
+      <Dropdown options = {data}/>
+      <button type='submit'>
+        Search
+      </button>
     </div>
   );
 }
