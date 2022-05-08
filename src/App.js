@@ -1,23 +1,17 @@
-import logo from './logo.svg';
 import './App.css';
+import Dropdown from './Dropdown'
 
-function App() {
+const App = () => {
+
+  const data = [
+    {value: 1, name: "A"},
+    {value: 2, name: "B"},
+    {value: 3, name: "C"},
+    ]
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+      <Dropdown options = {data}/>
     </div>
   );
 }
