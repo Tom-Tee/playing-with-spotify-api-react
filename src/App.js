@@ -17,20 +17,24 @@ const App = () => {
     ]
 
     const [token, setToken] = useState('');
+    const [response, apiResponse] = useState("");
 
     useEffect(() => {
-      axios('https://accounts.spotify.com/api/token', {
-        headers: {
-          'Content-Type' : 'application/x-www-form-urlencoded',
-          'Authorisation' : 'Basic' + btoa(clientId + ":" + clientSecret)
-        },
-        data: 'grant_type=client_credentials',
-        method: 'POST'
-      })
-      .then(tokenResponse => {
-        console.log(tokenResponse.data.access_token)
-      })
+      // axios('https://accounts.spotify.com/api/token', {
+      //   headers: {
+      //     'Content-Type' : 'application/x-www-form-urlencoded; charset=UTF-8',
+      //     'Authorisation' : 'Basic' + btoa(clientId + ":" + clientSecret)
+      //   },
+      //   data: 'grant_type=client_credentials',
+      //   method: 'POST'
+      // })
+      // .then(tokenResponse => {
+      //   console.log(tokenResponse.data.access_token)
+      // })
 
+    fetch("http://localhost:9000/testAPI")
+        .then(res => res.text())
+        .then(res => apiResponse(res));
     }, [])
 
 
@@ -42,6 +46,7 @@ const App = () => {
         <button type='submit'>
           Search
         </button>
+        <p className="App-intro">{response}</p>
       </div>
     </form>
   );
